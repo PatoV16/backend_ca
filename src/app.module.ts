@@ -15,16 +15,22 @@ import { PostsModule } from './posts/posts.module';
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      url: process.env.DATABASE_URL,
+      host: process.env.DB_HOST,
+      port: parseInt(process.env.DB_PORT || '5432'),
+      username: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
       autoLoadEntities: true,
-      synchronize: process.env.NODE_ENV !== 'production', // Mejor práctica
+      synchronize: process.env.NODE_ENV !== 'production',
       ssl: {
         rejectUnauthorized: false,
       },
-      logging: ['error', 'warn'], // Para ver errores en los logs
+      logging: ['error', 'warn'],
+      retryAttempts: 10,
+      retryDelay: 3000,
       extra: {
-        connectionTimeoutMillis: 10000, // 10 segundos timeout
-        max: 10, // Pool de 10 conexiones máximo
+        connectionTimeoutMillis: 20000,
+        max: 10,
       },
     }),
     ConfigurationModule,
