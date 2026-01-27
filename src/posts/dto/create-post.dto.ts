@@ -1,4 +1,18 @@
-import { IsArray, IsOptional, IsString, MaxLength } from 'class-validator';
+// import { IsArray, IsOptional, IsString, MaxLength } from 'class-validator';
+
+// export class CreatePostDto {
+//   @IsString()
+//   userName: string;
+
+//   @IsString()
+//   @MaxLength(1000)
+//   content: string;
+
+//   @IsOptional()
+//   @IsArray()
+//   imageUrls?: string[];
+// }
+import { IsString, MaxLength } from 'class-validator';
 
 export class CreatePostDto {
   @IsString()
@@ -7,8 +21,4 @@ export class CreatePostDto {
   @IsString()
   @MaxLength(1000)
   content: string;
-
-  @IsOptional()
-  @IsArray()
-  imageUrls?: string[];
 }
